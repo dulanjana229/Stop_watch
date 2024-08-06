@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Stop Watch</title>
+    
+
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+      }
+      body {
+        background: darkkhaki;
+        font-family: Courier;
+      }
+      h1 {
+        font-size: 3rem;
+        color: white;
+        text-align: center;
+        margin-top: 11rem;
+      }
+      p {
+        font-size: 3rem;
+        text-align: center;
+        margin-top: 2rem;
+        font-weight: bold;
+      }
+      .btn {
+        padding: 10px;
+        width: 90px;
+        font-weight: bold;
+        background: orange;
+        border-radius: 1rem;
+        border: 1px solid white;
+        cursor: pointer;
+      }
+
+      .btn:hover {
+        background: rgb(207, 142, 21);
+        color: white;
+        transition: all 300ms ease-in-out;
+      }
+
+      .btn-container {
+        margin-top: 2rem;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Stop watch</h1>
+    <p>
+      <span id="minute">00</span>:<span id="seconds">00</span>:<span id="tens"
+        >00</span
+      >
+    </p>
+
+    <div class="btn-container">
+      <button class="btn" id="btn-start">Start</button>
+      <button class="btn" id="btn-stop">Stop</button>
+      <button class="btn" id="btn-reset">Reset</button>
+    </div>
+
+    <script>
+      let tens = 00;
+      let seconds = 00;
+      let minute = 00;
+
+      let appendTens = document.getElementById("tens");
+      let appendSeconds = document.getElementById("seconds");
+      let appendMinute = document.getElementById("minute");
+      let startBtn = document.getElementById("btn-start");
+      let stopBtn = document.getElementById("btn-stop");
+      let resetBtn = document.getElementById("btn-reset");
+
+      let interval;
+
+      startBtn.onclick = function () {
+        clearInterval(interval);
+        interval = setInterval(startTimer, 10);
+      };
+
+      stopBtn.onclick = function () {
+        clearInterval(interval);
+      };
+
+      resetBtn.onclick = function () {
+        clearInterval(interval);
+        tens = "00";
+        seconds = "00";
+        minute = "00";
+        appendTens.innerHTML = tens;
+        appendSeconds.innerHTML = seconds;
+        appendMinute.innerHTML = minute;
+      };
+
+      function startTimer() {
+        tens++;
+        if (tens < 10) {
+          appendTens.innerHTML = "0" + tens;
+        } else {
+          appendTens.innerHTML = tens;
+        }
+
+        if (tens > 99) {
+          seconds++;
+          appendSeconds.innerHTML = "0" + seconds;
+          tens = 0;
+          appendTens.innerHTML = "00";
+        }
+
+        if (seconds > 9) {
+          appendSeconds.innerHTML = seconds;
+        }
+
+        if (seconds > 59) {
+          minute++;
+          appendMinute.innerHTML = "0" + minute;
+          seconds = 0;
+          appendSeconds.innerHTML = "00";
+        }
+
+        if (minute > 9) {
+          appendMinute.innerHTML = minute;
+        }
+      }
+    </script>
+  </body>
+</html>
